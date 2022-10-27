@@ -6,6 +6,8 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
 
+import { Menu } from "@headlessui/react"
+
 const links = [
   {
     text: "Tutorial",
@@ -96,6 +98,9 @@ const IndexPage = () => (
         Edit <code>src/pages/index.js</code> to update this page.
       </p>
     </div>
+    <div className={styles.textCenter}>
+      <MyDropdown />
+    </div>
     <ul className={styles.list}>
       {links.map(link => (
         <li key={link.url} className={styles.listItem}>
@@ -126,3 +131,36 @@ const IndexPage = () => (
 export const Head = () => <Seo title="Home" />
 
 export default IndexPage
+
+function MyDropdown() {
+  return (
+    <Menu>
+      <Menu.Button>More</Menu.Button>
+      <Menu.Items>
+        <Menu.Item>
+          {({ active }) => (
+            <a
+              className={`${active && "bg-blue-500"}`}
+              href="/account-settings"
+            >
+              Account settings
+            </a>
+          )}
+        </Menu.Item>
+        <Menu.Item>
+          {({ active }) => (
+            <a
+              className={`${active && "bg-blue-500"}`}
+              href="/account-settings"
+            >
+              Documentation
+            </a>
+          )}
+        </Menu.Item>
+        <Menu.Item disabled>
+          <span className="opacity-75">Invite a friend (coming soon!)</span>
+        </Menu.Item>
+      </Menu.Items>
+    </Menu>
+  )
+}
