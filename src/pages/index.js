@@ -6,8 +6,6 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
 
-import { Menu } from "@headlessui/react"
-
 const links = [
   {
     text: "Tutorial",
@@ -98,9 +96,14 @@ const IndexPage = () => (
         Edit <code>src/pages/index.js</code> to update this page.
       </p>
     </div>
-    <div className={styles.textCenter}>
-      <MyDropdown />
+    <div id={React.useId()} className={styles.useId}>
+      A div with an ID provided by <pre>React.useId()</pre>
     </div>
+    Visit <Link to="/page-2">page-2</Link> to see the issue with{" "}
+    <a href="https://github.com/tailwindlabs/headlessui/issues/1961">
+      HeadlessUI
+    </a>
+    .
     <ul className={styles.list}>
       {links.map(link => (
         <li key={link.url} className={styles.listItem}>
@@ -131,36 +134,3 @@ const IndexPage = () => (
 export const Head = () => <Seo title="Home" />
 
 export default IndexPage
-
-function MyDropdown() {
-  return (
-    <Menu>
-      <Menu.Button>More</Menu.Button>
-      <Menu.Items>
-        <Menu.Item>
-          {({ active }) => (
-            <a
-              className={`${active && "bg-blue-500"}`}
-              href="/account-settings"
-            >
-              Account settings
-            </a>
-          )}
-        </Menu.Item>
-        <Menu.Item>
-          {({ active }) => (
-            <a
-              className={`${active && "bg-blue-500"}`}
-              href="/account-settings"
-            >
-              Documentation
-            </a>
-          )}
-        </Menu.Item>
-        <Menu.Item disabled>
-          <span className="opacity-75">Invite a friend (coming soon!)</span>
-        </Menu.Item>
-      </Menu.Items>
-    </Menu>
-  )
-}
